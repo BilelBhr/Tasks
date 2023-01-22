@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+
+    .list{
+       font-size: 20px;
+        width: 900px;
+        margin-left: 25%;
+        margin-top: 200px;
+        background-color: #1f212d;
+        color: white;
+        padding: 20px;
+        box-shadow: -15px -15px 2px #2ea3dd;
+        
+    }
+    .box{
+        width: 200px;
+        height: 200px;
+        background-color: #2ea3dd;
+    }
+    img{
+      background-attachment: fixed;
+    }
+    body{
+      background-image:url("im.jpg");
+    }
+    ul{
+        white-space: pre;
+    }
+    li {
+  display: flex; /* make the ul a flex container */
+  justify-content: space-between; /* align the li elements horizontally, with equal space between them */
+}
+    </style>
+  </head>
+  <body>
+    <div class="list">
+    <h1 style="margin-left: 330px;font-size: 45px;">Interface Admine</h1>
+    <!--<img src="EJE White.png" width="10px" height="10px">-->
+    <input type="file" id="image" style="width: 400px; height: 30px;font-size: 20px;" />
+    <input type="text" id="text" style="width: 400px; height: 30px;font-size: 20px;" />
+    <button id="button" style="height: 35px;font-size: 20px;">poster</button>
+    <ul class="listofitems"></ul>
+    </div>
+    <!--<div class="box">wa hello</div>-->
+    <script>
+      let button = document.querySelector("#button");
+      let liste = document.querySelector("ul");
+
+      let input = document.querySelector("#text");
+      let input1 = document.querySelector("#image");
+      button.addEventListener("click", function(){
+        poster();
+
+      });
+
+      function poster() {
+        if (isInputEmpty()) {
+          alert("Input incomplete, please type something or select file !");
+          return;
+        }
+    
+        /*let b=<button>Delete</button>*/
+        /*liste.appendChild(<li id="${id}"> ${input.value} <button onclick="removeItem(`${id}`)">Delete</button> </li> );*/
+        let file = input1.value.split("\\").pop();
+        liste.innerHTML += `<li><button style="height: 35px;font-size: 20px;" class="delete-button">Supprimer</button>TITRE:${input.value}<img class="Limg"src="${file}" style="width:150px;height:100px;"/></li> `;
+        input.value="";
+        input1.value="";
+        /*console.log(document.querySelector("ul"));*/
+      }
+
+      function isInputEmpty() {
+        if (input.value == "" ||input1.value == "" ) {
+          return true;
+        }
+        return false;
+      }
+      
+      input.addEventListener("keypress", function (e) {
+        //console.log(e.key);
+
+        if (e.key == "Enter") {
+          poster();
+        }
+    });
+      liste.addEventListener("click", function(event) {
+    if(event.target.classList.contains('delete-button')){
+      let listItem = event.target.parentNode;
+      liste.removeChild(listItem);
+    }
+  });
+
+  
+
+
+    </script>
+  </body>
+</html>

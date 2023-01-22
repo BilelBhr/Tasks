@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+
+    .list{
+       font-size: 20px;
+        width: 900px;
+        margin-left: 25%;
+        margin-top: 200px;
+        background-color: #1f212d;
+        color: white;
+        padding: 20px;
+        box-shadow: -15px -15px 2px #2ea3dd;
+        
+    }
+    .box{
+        width: 200px;
+        height: 200px;
+        background-color: #2ea3dd;
+    }
+    img{
+      background-attachment: fixed;
+    }
+    body{
+      background-image:url("im.jpg");
+    }
+    
+    </style>
+  </head>
+  <body>
+    <div class="list">
+    <h1 style="margin-left: 340px;font-size: 45px;">TODO LIST</h1>
+    <!--<img src="EJE White.png" width="10px" height="10px">-->
+    <input type="text" style="width: 400px; height: 30px;font-size: 20px;" />
+    <button style="height: 35px;font-size: 20px;">Ajouter dans la liste</button>
+    <button class="reset" style="height: 35px;font-size: 20px;">Reset</button>
+    <ul class="listofitems"></ul>
+    </div>
+    <!--<div class="box">wa hello</div>-->
+    <script>
+      let button = document.querySelector("button");
+
+      let Br= document.querySelector(".reset");
+      let liste = document.querySelector("ul");
+
+      let input = document.querySelector("input");
+      Br.addEventListener("click",function(){
+        liste.innerHTML=``;
+      })
+      button.addEventListener("click", function(){
+        addTodo();
+        button.innerHTML=`Ajouter dans la liste `
+        ch=``;
+
+      });
+      let ch=``;
+
+      function addTodo() {
+        if (isInputEmpty()) {
+          alert("Input empty, please type something !");
+          return;
+        }
+    
+        /*let b=<button>Delete</button>*/
+        /*liste.appendChild(<li id="${id}"> ${input.value} <button onclick="removeItem(`${id}`)">Delete</button> </li> );*/
+        liste.innerHTML += `<li> ${input.value} <button class="delete-button">Delete</button> </li> `;
+        input.value="";
+        /*console.log(document.querySelector("ul"));*/
+      }
+
+      function isInputEmpty() {
+        if (input.value == "") {
+          return true;
+        }
+        return false;
+      }
+      
+      input.addEventListener("keypress", function (e) {
+        //console.log(e.key);
+
+        if (e.key == "Enter") {
+          addTodo();
+          button.innerHTML=`Ajouter dans la liste `
+          ch=``;
+        }
+        else{
+         ch+=`${event.key}`;
+         button.innerHTML=`Ajouter ${ch} dans la liste`;}
+      });
+      liste.addEventListener("click", function(event) {
+    if(event.target.classList.contains('delete-button')){
+      let listItem = event.target.parentNode;
+      liste.removeChild(listItem);
+    }
+  });
+
+  
+
+
+    </script>
+  </body>
+</html>
